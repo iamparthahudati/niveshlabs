@@ -1,0 +1,5 @@
+niveshlabs.com, www.niveshlabs.com {
+    @backend path /api/* /actuator/* /admin/*
+    reverse_proxy @backend backend:8080
+    reverse_proxy frontend:3000
+}

@@ -1,98 +1,130 @@
-# vinext-starter
+# NiveshLabs
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+NiveshLabs is a local-first finance education project. The public website uses
+Next.js, and the backend uses Java with Spring Boot. It is designed to run on a
+normal VPS without depending on a proprietary application host.
 
-## Prerequisites
+## Architecture
 
-- Node.js `>=22.13.0`
+```text
+Browser
+  |
+  +-- Next.js frontend (port 3000)
+  |
+  +-- /api/* -> Spring Boot backend (port 8080)
+                     |
+                     +-- PostgreSQL (port 5432)
+```
 
-## Quick Start
+The backend currently contains one deliberately small feature:
+`GET /api/health`. It also includes the first database migration for future
+articles. This keeps the starting point understandable while proving that the
+Java application, database tooling, and frontend routing are connected.
+
+## Project layout
+
+```text
+app/                 Next.js pages and styles
+backend/             Java and Spring Boot application
+backend/src/         Java source, configuration, migrations, and tests
+infra/               VPS-facing configuration
+public/              Public images and icons
+tests/               Frontend project checks
+compose.yaml         Full local stack with PostgreSQL
+```
+
+## What is already installed on this computer
+
+- Node.js 24
+- npm 11
+- Java 17
+
+Maven does not need to be installed globally. The project contains its own
+Maven launcher in `backend/mvnw`.
+
+Docker is not installed yet. It is optional for the first lessons because the
+backend uses a temporary in-memory H2 database when PostgreSQL is unavailable.
+
+## Run locally without Docker
+
+Open two Terminal windows in this project.
+
+Terminal 1 — Java backend:
+
+```bash
+npm run dev:backend
+```
+
+The first run downloads Maven and Java dependencies. When it is ready, visit:
+
+```text
+http://localhost:8080/api/health
+```
+
+Terminal 2 — Next.js frontend:
 
 ```bash
 npm install
-npm run dev
+npm run dev:frontend
+```
+
+Visit:
+
+```text
+http://localhost:3000
+```
+
+If port 3000 is already being used, Next.js automatically chooses another
+port such as 3001. Always use the exact local address printed in the Terminal.
+
+Next.js forwards `/api/*` to Spring Boot during local development, so this also
+works when both applications are running:
+
+```text
+http://localhost:3000/api/health
+```
+
+Stop either application with `Control+C` in its Terminal window.
+
+## Run tests
+
+Frontend:
+
+```bash
+npm test
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+Backend:
 
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm run test:backend
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+## Run the complete stack with Docker later
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+After Docker Desktop is installed:
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+```bash
+docker compose up --build
+```
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+This starts Next.js, Spring Boot and PostgreSQL. The PostgreSQL password in
+`compose.yaml` is only for local development and must not be reused on the VPS.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+## Environment values
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+Copy `.env.example` to `.env.local` only when you need to change the default
+backend address. Never commit real passwords or API keys.
 
-## Useful Commands
+The backend environment example is in `backend/.env.example`. Spring Boot uses
+H2 by default for the first local lessons and switches to PostgreSQL when the
+database environment values are supplied.
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+## Production direction
 
-## Learn More
+The `infra/Caddyfile` shows the future VPS routing. It is not used during the
+first local lessons. We will deploy to `staging.niveshlabs.com` before changing
+the live domain.
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Read [docs/LEARNING_PATH.md](docs/LEARNING_PATH.md) before adding features.

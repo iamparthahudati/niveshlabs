@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: niveshlabs-api
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:niveshlabs;MODE=PostgreSQL;DB_CLOSE_DELAY=-1}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+server:
+  port: ${PORT:8080}

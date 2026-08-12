@@ -1,0 +1,40 @@
+services:
+  database:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: niveshlabs
+      POSTGRES_USER: niveshlabs
+      POSTGRES_PASSWORD: local-development-only
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U niveshlabs -d niveshlabs"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: jdbc:postgresql://database:5432/niveshlabs
+      DATABASE_USERNAME: niveshlabs
+      DATABASE_PASSWORD: local-development-only
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: .
+    environment:
+      BACKEND_URL: http://backend:8080
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:

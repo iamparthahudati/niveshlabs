@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "NiveshLabs — Coming Soon",
   description:
     "Simple tools and clear guidance to help you understand, plan and grow your money.",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
