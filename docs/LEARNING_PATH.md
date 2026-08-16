@@ -29,17 +29,22 @@ Topics: HTTP, JSON, ports, Java records, controllers, Maven, and tests.
 
 ## Milestone 2 — First finance calculator
 
-Build an EMI calculator in the Java backend.
+Build a calculator as a **client-side TypeScript** function.
 
-- Define the input fields.
-- Validate positive values.
-- Put the formula in a service class.
-- Keep the controller focused on HTTP.
-- Test normal inputs and edge cases.
-- Create the React form only after the Java tests pass.
+> Decision (2026-08-17): calculator math lives in the frontend
+> (`lib/calculators/`) as pure, tested TypeScript functions — not the Java
+> backend. Reasons: instant UX with no network round-trip per calculation, best
+> for SEO (no API dependency), and smallest attack surface. See
+> [BACKLOG.md Phase 2](BACKLOG.md).
 
-Topics: DTOs, validation, services, exceptions, decimal precision, and unit
-testing.
+- Define the input fields and their types.
+- Put the formula in a pure function in `lib/calculators/<name>.ts`.
+- Validate positive values; handle edge cases (0, huge, decimals).
+- Test the function in isolation first.
+- Build the React form + result components only after the tests pass.
+
+Topics: pure functions, TypeScript types, input validation, decimal precision,
+and unit testing.
 
 ## Milestone 3 — Article model
 

@@ -93,6 +93,11 @@ tokens; keyboard + screen-reader navigable; passes [COMPONENTS.md §7](COMPONENT
 **Goal:** each calculator is its **own page**, built separately, but all reuse a
 shared shell. This is the repeatable recipe — do it once, repeat per calculator.
 
+> **Decided (2026-08-17): calculator logic = client-side TypeScript** in
+> `lib/calculators/` (pure, tested functions). Not the Java backend — chosen for
+> instant UX, SEO, and minimal attack surface. `LEARNING_PATH.md` M2 updated to
+> match.
+
 **Shared groundwork (build once, before 2.1)**
 - [ ] `lib/calculators/` — folder for pure math functions (tested, no UI).
 - [ ] `components/calculators/CalculatorForm` (generic input shell).
