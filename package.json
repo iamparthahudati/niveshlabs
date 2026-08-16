@@ -9,7 +9,7 @@
     "dev": "next dev",
     "dev:frontend": "next dev",
     "dev:backend": "cd backend && ./mvnw spring-boot:run",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint . --ignore-pattern .next",
     "test": "npm run lint && node --test tests/*.test.mjs",

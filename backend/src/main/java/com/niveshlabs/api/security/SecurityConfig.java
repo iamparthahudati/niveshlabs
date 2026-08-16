@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
+
 @Configuration
 public class SecurityConfig {
 
@@ -24,6 +26,13 @@ public class SecurityConfig {
 
         return http
             .csrf(csrf -> csrf.csrfTokenRepository(csrfRepository))
+            .headers(headers -> {
+                headers.contentTypeOptions(options -> {});
+                headers.frameOptions(frame -> frame.deny());
+                headers.referrerPolicy(referrer -> referrer.policy(ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN));
+                headers.permissionsPolicy(permissions -> permissions.policy("camera=(), microphone=(), geolocation=()"));
+                headers.httpStrictTransportSecurity(hsts -> hsts.includeSubDomains(true).maxAgeInSeconds(63072000).preload(true));
+            })
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/health", "/api/auth/csrf", "/api/auth/login", "/api/articles/**").permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")

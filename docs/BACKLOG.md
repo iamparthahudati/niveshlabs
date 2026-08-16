@@ -37,13 +37,13 @@ structure you proposed, refined slightly. Tick the boxes as you go.
 
 **Goal:** the repo, environments, and guardrails are ready. No feature work.
 
-- [ ] Confirm local stack runs (frontend 3000, backend 8080, DB reachable).
-- [ ] Secrets hygiene verified — no secret in git, `.env*` ignored ([SECURITY.md §2](SECURITY.md)).
-- [ ] CI runs `npm test`, `npm run build`, `npm run test:backend` on every push.
-- [ ] Central security-headers config (Next.js + Spring) scaffolded ([SECURITY.md §4](SECURITY.md)).
-- [ ] Design tokens file (colours, spacing, fonts, radius as CSS variables).
-- [ ] Decide + document folder structure (`components/ui`, `header`, `seo`, `lib`, …).
-- [ ] `docs/BACKLOG.md` (this file) is the single source of task truth.
+- [x] Confirm local stack runs (frontend 3000, backend 8080, DB reachable).
+- [x] Secrets hygiene verified — no secret in git, `.env*` ignored ([SECURITY.md §2](SECURITY.md)).
+- [x] CI runs `npm test`, `npm run build`, `npm run test:backend` on every push.
+- [x] Central security-headers config (Next.js + Spring) scaffolded ([SECURITY.md §4](SECURITY.md)).
+- [x] Design tokens file (colours, spacing, fonts, radius as CSS variables).
+- [x] Decide + document folder structure (`components/ui`, `header`, `seo`, `lib`, …).
+- [x] `docs/BACKLOG.md` (this file) is the single source of task truth.
 
 **DoD:** all three test commands green; CI green; no secrets tracked; headers
 present on a curl of the homepage.

@@ -1,0 +1,148 @@
+/**
+ * NiveshLabs Design Tokens
+ * Single source of truth for colors, typography, spacing, radii, shadows, and layout variables.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Manrope:wght@200..800&display=swap");
+
+:root {
+  /* ==========================================================================
+     Colors & Theme Palette
+     ========================================================================== */
+  /* Brand Primary & Secondary */
+  --color-navy: #111a3a;
+  --color-navy-dark: #0a1024;
+  --color-navy-light: #1c2850;
+  --color-indigo: #4f46df;
+  --color-indigo-dark: #382ec2;
+  --color-indigo-light: #eef2ff;
+  --color-indigo-subtle: #f5f7ff;
+
+  /* Functional / Status */
+  --color-green: #0b8f55;
+  --color-green-dark: #086b3f;
+  --color-green-light: #e6f7ef;
+  --color-red: #df3545;
+  --color-red-dark: #b82231;
+  --color-red-light: #fdf2f2;
+  --color-amber: #d97706;
+  --color-amber-light: #fef3c7;
+
+  /* Neutrals & Borders */
+  --color-muted: #667085;
+  --color-muted-light: #98a2b3;
+  --color-muted-dark: #475467;
+  --color-line: #e6e9f0;
+  --color-line-subtle: #f0f2f7;
+
+  /* Surfaces & Backgrounds */
+  --color-bg: #ffffff;
+  --color-surface: #f8f9fc;
+  --color-surface-hover: #f1f3f9;
+  --color-card: #ffffff;
+
+  /* Text Roles */
+  --color-text-primary: var(--color-navy);
+  --color-text-secondary: var(--color-muted);
+  --color-text-muted: var(--color-muted-light);
+  --color-text-inverse: #ffffff;
+
+  /* Legacy aliases for backwards compatibility */
+  --navy: var(--color-navy);
+  --muted: var(--color-muted);
+  --line: var(--color-line);
+  --indigo: var(--color-indigo);
+  --indigo-dark: var(--color-indigo-dark);
+  --green: var(--color-green);
+  --red: var(--color-red);
+
+  /* ==========================================================================
+     Typography
+     ========================================================================== */
+  --font-dm-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-manrope: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-manrope);
+
+  /* Font Sizes */
+  --font-size-2xs: 0.6875rem; /* 11px */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* ==========================================================================
+     Spacing Scale
+     ========================================================================== */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ==========================================================================
+     Border Radii
+     ========================================================================== */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     Shadows & Elevation
+     ========================================================================== */
+  --shadow-xs: 0 1px 2px rgb(17 24 39 / 0.05);
+  --shadow-sm: 0 1px 3px rgb(17 24 39 / 0.08), 0 1px 2px rgb(17 24 39 / 0.04);
+  --shadow-md: 0 4px 6px -1px rgb(17 24 39 / 0.08), 0 2px 4px -2px rgb(17 24 39 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(17 24 39 / 0.08), 0 4px 6px -4px rgb(17 24 39 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(17 24 39 / 0.08), 0 8px 10px -6px rgb(17 24 39 / 0.04);
+  --shadow-focus: 0 0 0 3px rgba(79, 70, 223, 0.25);
+
+  /* ==========================================================================
+     Layout & Container Limits
+     ========================================================================== */
+  --container-max-w: 1180px;
+  --container-narrow-w: 768px;
+  --container-padding: 20px;
+
+  /* ==========================================================================
+     Transitions
+     ========================================================================== */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
