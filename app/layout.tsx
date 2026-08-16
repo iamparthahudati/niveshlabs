@@ -14,9 +14,9 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://niveshlabs.com"),
-  title: "NiveshLabs — Coming Soon",
+  title: "NiveshLabs — Markets, Tools and Insights",
   description:
-    "Simple tools and clear guidance to help you understand, plan and grow your money.",
+    "Track Indian markets, explore mutual funds, compare credit cards and use practical finance calculators.",
   alternates: {
     canonical: "/",
   },
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
   },
   openGraph: {
-    title: "NiveshLabs — Coming Soon",
+    title: "NiveshLabs — Markets, Tools and Insights",
     description:
-      "Simple tools and clear guidance to help you understand, plan and grow your money.",
+      "Track Indian markets, explore mutual funds, compare credit cards and use practical finance calculators.",
     url: "https://niveshlabs.com",
     siteName: "NiveshLabs",
     images: [{ url: "/og.png", width: 1200, height: 630 }],
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NiveshLabs — Coming Soon",
+    title: "NiveshLabs — Markets, Tools and Insights",
     description:
-      "Simple tools and clear guidance to help you understand, plan and grow your money.",
+      "Track Indian markets, explore mutual funds, compare credit cards and use practical finance calculators.",
     images: ["/og.png"],
   },
 };

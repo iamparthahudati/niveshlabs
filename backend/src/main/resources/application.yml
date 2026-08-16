@@ -12,6 +12,12 @@ spring:
   flyway:
     enabled: true
 
+niveshlabs:
+  admin:
+    email: ${ADMIN_EMAIL:admin@niveshlabs.local}
+    password: ${ADMIN_PASSWORD:}
+    display-name: ${ADMIN_DISPLAY_NAME:Partha}
+
 management:
   endpoints:
     web:
@@ -20,3 +26,9 @@ management:
 
 server:
   port: ${PORT:8080}
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        same-site: strict
+        secure: ${SESSION_COOKIE_SECURE:false}

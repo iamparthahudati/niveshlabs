@@ -16,10 +16,9 @@ Browser
                      +-- PostgreSQL (port 5432)
 ```
 
-The backend currently contains one deliberately small feature:
-`GET /api/health`. It also includes the first database migration for future
-articles. This keeps the starting point understandable while proving that the
-Java application, database tooling, and frontend routing are connected.
+The backend contains health, admin authentication and article-management APIs.
+Admin passwords are hashed with BCrypt, login state is stored in an HTTP-only
+session cookie, and data-changing requests use CSRF protection.
 
 ## Project layout
 
@@ -52,6 +51,9 @@ Open two Terminal windows in this project.
 Terminal 1 — Java backend:
 
 ```bash
+ADMIN_EMAIL=admin@niveshlabs.local \
+ADMIN_PASSWORD='choose-a-long-password' \
+ADMIN_DISPLAY_NAME=Partha \
 npm run dev:backend
 ```
 
@@ -73,6 +75,11 @@ Visit:
 ```text
 http://localhost:3000
 ```
+
+Then visit `/admin`. You will be redirected to `/admin/login`. Sign in with
+the email and password supplied when starting the backend. The account is
+created only when that email does not already exist; changing the environment
+password later does not overwrite an existing account.
 
 If port 3000 is already being used, Next.js automatically chooses another
 port such as 3001. Always use the exact local address printed in the Terminal.
@@ -128,3 +135,14 @@ first local lessons. We will deploy to `staging.niveshlabs.com` before changing
 the live domain.
 
 Read [docs/LEARNING_PATH.md](docs/LEARNING_PATH.md) before adding features.
+
+## First release plan
+
+The full step-by-step plan for the first public release lives in `docs/`:
+
+- [docs/ROADMAP.md](docs/ROADMAP.md) — master, phased build plan (start here).
+- [docs/COMPONENTS.md](docs/COMPONENTS.md) — how we build the UI one small
+  component at a time (header first, then tools, etc.).
+- [docs/SECURITY.md](docs/SECURITY.md) — the "pen-test proof / hacking proof"
+  standard and checklist.
+- [docs/SEO.md](docs/SEO.md) — classic SEO and LLM / AI-chat (GEO) SEO.

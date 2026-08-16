@@ -21,6 +21,9 @@ services:
       DATABASE_URL: jdbc:postgresql://database:5432/niveshlabs
       DATABASE_USERNAME: niveshlabs
       DATABASE_PASSWORD: local-development-only
+      ADMIN_EMAIL: admin@niveshlabs.local
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD before starting Docker Compose}
+      ADMIN_DISPLAY_NAME: Partha
     depends_on:
       database:
         condition: service_healthy

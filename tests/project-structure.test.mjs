@@ -32,3 +32,17 @@ test("includes the Java backend starter", async () => {
   assert.match(pom, /postgresql/);
   assert.match(controller, /\/api\/health/);
 });
+
+test("protects the admin panel and includes article management", async () => {
+  const [security, login, articles, proxy] = await Promise.all([
+    readFile(new URL("backend/src/main/java/com/niveshlabs/api/security/SecurityConfig.java", root), "utf8"),
+    readFile(new URL("app/admin/login/page.tsx", root), "utf8"),
+    readFile(new URL("backend/src/main/java/com/niveshlabs/api/article/AdminArticleController.java", root), "utf8"),
+    readFile(new URL("proxy.ts", root), "utf8"),
+  ]);
+
+  assert.match(security, /springframework\.security/);
+  assert.match(login, /api\/auth\/login/);
+  assert.match(articles, /api\/admin\/articles/);
+  assert.match(proxy, /JSESSIONID/);
+});
