@@ -56,32 +56,32 @@ present on a curl of the homepage.
 first, compose upward. Full method in [COMPONENTS.md](COMPONENTS.md).
 
 **UI primitives (atoms)**
-- [ ] `Button`
-- [ ] `Link` / `NavLink` (with active state)
-- [ ] `Input`, `Select`, `Field` (label + input + error)
-- [ ] `Card`
-- [ ] `Container` (max-width wrapper)
-- [ ] `Icon`
-- [ ] `Tag` / `Badge` (e.g. risk level, category)
+- [x] `Button`
+- [x] `Link` / `NavLink` (with active state)
+- [x] `Input`, `Select`, `Field` (label + input + error)
+- [x] `Card`
+- [x] `Container` (max-width wrapper)
+- [x] `Icon`
+- [x] `Tag` / `Badge` (e.g. risk level, category)
 
 **Header (decompose the existing `site-header.tsx`)**
-- [ ] `Brand`
-- [ ] `MarketStrip` + `MarketItem` (keep the honest "Sample data" label)
-- [ ] `PrimaryNav`
-- [ ] `SearchForm`
-- [ ] `AccountButton`
-- [ ] `MobileMenu`
-- [ ] `SiteHeader` (assembles the above)
+- [x] `Brand`
+- [x] `MarketStrip` + `MarketItem` (keep the honest "Sample data" label)
+- [x] `PrimaryNav`
+- [x] `SearchForm`
+- [x] `AccountButton`
+- [x] `MobileMenu`
+- [x] `SiteHeader` (assembles the above)
 
 **Footer & shell**
-- [ ] `Disclaimer` (market-risk line — mandatory on every page with figures)
-- [ ] `LegalLinks` (privacy, terms, disclaimer, contact)
-- [ ] `Footer`
-- [ ] `PageShell` (header + `<main id="main">` + footer + skip-link)
+- [x] `Disclaimer` (market-risk line — mandatory on every page with figures)
+- [x] `LegalLinks` (privacy, terms, disclaimer, contact)
+- [x] `Footer`
+- [x] `PageShell` (header + `<main id="main">` + footer + skip-link)
 
 **SEO helpers**
-- [ ] `seo/JsonLd` (renders structured data)
-- [ ] `seo/Breadcrumbs`
+- [x] `seo/JsonLd` (renders structured data)
+- [x] `seo/Breadcrumbs`
 
 **DoD:** header/footer render on every page via `PageShell`; all values from
 tokens; keyboard + screen-reader navigable; passes [COMPONENTS.md §7](COMPONENTS.md) checklist.

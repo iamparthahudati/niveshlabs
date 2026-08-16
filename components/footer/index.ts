@@ -1,5 +1,3 @@
-/**
- * Footer Components (Phase 1)
- * Footer, Disclaimer, LegalLinks
- */
-export {};
+export * from "./Disclaimer";
+export * from "./LegalLinks";
+export * from "./Footer";

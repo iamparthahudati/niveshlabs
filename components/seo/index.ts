@@ -1,5 +1,2 @@
-/**
- * SEO Components (Phase 1/2)
- * JsonLd, Breadcrumbs
- */
-export {};
+export * from "./JsonLd";
+export * from "./Breadcrumbs";

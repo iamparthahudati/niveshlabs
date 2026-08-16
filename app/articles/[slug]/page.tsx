@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import sanitizeHtml from "sanitize-html";
-import { SiteHeader } from "@/components/site-header";
+import { PageShell } from "@/components/layout/PageShell";
+import { Container } from "@/components/ui/Container";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getPublishedArticle } from "@/lib/public-articles";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +15,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const article = await getPublishedArticle(slug);
   return article
-    ? { title: `${article.title} — NiveshLabs`, description: article.summary }
+    ? {
+        title: `${article.title} — NiveshLabs`,
+        description: article.summary,
+        alternates: {
+          canonical: `/articles/${article.slug}`,
+        },
+      }
     : { title: "Article not found — NiveshLabs" };
 }
 
@@ -39,21 +47,62 @@ export default async function ArticlePage({ params }: PageProps) {
     },
   });
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.summary,
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt || article.publishedAt,
+    mainEntityOfPage: `https://niveshlabs.com/articles/${article.slug}`,
+    author: {
+      "@type": "Organization",
+      name: "NiveshLabs Editorial Team",
+      url: "https://niveshlabs.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "NiveshLabs",
+      url: "https://niveshlabs.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://niveshlabs.com/favicon.svg",
+      },
+    },
+  };
+
   return (
-    <>
-      <SiteHeader />
-      <main className="article-page">
-        <article>
-          <Link className="article-back" href="/">← All articles</Link>
-          <header className="article-hero">
-            <p className="section-kicker">NIVESHLABS GUIDE</p>
-            <h1>{article.title}</h1>
-            <p>{article.summary}</p>
-            <time dateTime={article.publishedAt}>Published {new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "long", year: "numeric" }).format(new Date(article.publishedAt))}</time>
-          </header>
-          <div className="article-content" dangerouslySetInnerHTML={{ __html: safeContent }} />
-        </article>
-      </main>
-    </>
+    <PageShell mainLabel={`Article: ${article.title}`}>
+      <JsonLd schema={articleSchema} id="article-structured-data" />
+      <div className="article-page">
+        <Container size="narrow">
+          <Breadcrumbs
+            items={[
+              { label: "Learn", href: "/#learn" },
+              { label: article.title },
+            ]}
+          />
+          <article>
+            <header className="article-hero">
+              <p className="section-kicker">NIVESHLABS GUIDE</p>
+              <h1>{article.title}</h1>
+              <p>{article.summary}</p>
+              <time dateTime={article.publishedAt}>
+                Published{" "}
+                {new Intl.DateTimeFormat("en-IN", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                }).format(new Date(article.publishedAt))}
+              </time>
+            </header>
+            <div
+              className="article-content"
+              dangerouslySetInnerHTML={{ __html: safeContent }}
+            />
+          </article>
+        </Container>
+      </div>
+    </PageShell>
   );
 }
