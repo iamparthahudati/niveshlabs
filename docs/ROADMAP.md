@@ -7,6 +7,7 @@ understand the whole system in your head.
 Three companion documents go deeper on the hard parts. Read them when the
 roadmap points you to them:
 
+- [BACKLOG.md](BACKLOG.md) — the trackable, checkbox task list organized by phase.
 - [COMPONENTS.md](COMPONENTS.md) — how we build the UI, one small piece at a time.
 - [SECURITY.md](SECURITY.md) — how we make it "pen-test proof / hacking proof".
 - [SEO.md](SEO.md) — classic SEO **and** LLM / AI-chat (GEO) SEO.

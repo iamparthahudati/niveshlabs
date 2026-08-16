@@ -141,6 +141,7 @@ Read [docs/LEARNING_PATH.md](docs/LEARNING_PATH.md) before adding features.
 The full step-by-step plan for the first public release lives in `docs/`:
 
 - [docs/ROADMAP.md](docs/ROADMAP.md) — master, phased build plan (start here).
+- [docs/BACKLOG.md](docs/BACKLOG.md) — the trackable, checkbox task list by phase.
 - [docs/COMPONENTS.md](docs/COMPONENTS.md) — how we build the UI one small
   component at a time (header first, then tools, etc.).
 - [docs/SECURITY.md](docs/SECURITY.md) — the "pen-test proof / hacking proof"
